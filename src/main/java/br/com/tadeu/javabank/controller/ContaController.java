@@ -1,4 +1,4 @@
-package br.com.tadeu.javabank;
+package br.com.tadeu.javabank.controller;
 
 import java.util.List;
 
