@@ -43,4 +43,12 @@ public class ContaService {
 	public List<Conta> encontraMilionarios() {
 		return contaRepository.findBySaldoGreaterThan(new BigDecimal(1000000L));
 	}
+
+	public List<Conta> buscarTodos() {
+		return contaRepository.findAll();
+	}
+
+	public Conta buscarPorId(Long id) {
+		return contaRepository.findById(id).orElse(null);
+	}
 }
