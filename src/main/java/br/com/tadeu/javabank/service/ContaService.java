@@ -27,18 +27,6 @@ public class ContaService {
 	@Autowired
 	private BancoRepository bancoRepository;
 
-	public Conta salvar(@Valid Conta conta) {
-		conta.setDataCriacao(new Date());
-		Cliente cliente = clienteRepository.findByNome(conta.getCliente().getNome());
-		if(cliente != null) {
-			conta.setCliente(cliente);
-		}
-		Banco banco = bancoRepository.findByNome(conta.getBanco().getNome());
-		if(banco != null) {
-			conta.setBanco(banco);
-		}
-		return contaRepository.save(conta);
-	}
 
 	public List<Conta> encontraMilionarios() {
 		return contaRepository.findBySaldoGreaterThan(new BigDecimal(1000000L));
@@ -47,8 +35,42 @@ public class ContaService {
 	public List<Conta> buscarTodos() {
 		return contaRepository.findAll();
 	}
+	
+	public List<Conta> buscarAtivas() {
+		return contaRepository.findByAtivaTrue();
+	}
 
 	public Conta buscarPorId(Long id) {
 		return contaRepository.findById(id).orElse(null);
+	}
+	
+	public Conta salvar(@Valid Conta conta) {
+		conta.setDataCriacao(new Date());
+		processaClienteExistente(conta);
+		processaBancoExistente(conta);
+		return contaRepository.save(conta);
+	}
+
+	private void processaClienteExistente(Conta conta) {
+		Cliente cliente = clienteRepository.findByNome(conta.getCliente().getNome());
+		if(cliente != null) {
+			conta.setCliente(cliente);
+		}
+	}
+
+	private void processaBancoExistente(Conta conta) {
+		Banco banco = bancoRepository.findByNome(conta.getBanco().getNome());
+		if(banco != null) {
+			conta.setBanco(banco);
+		}
+	}
+
+	public void deletarPorId(Long id) {
+		var contaOp = contaRepository.findById(id);
+		if(contaOp.isPresent()) {
+			var conta = contaOp.get();
+			conta.setAtiva(false);
+			contaRepository.save(conta);
+		}
 	}
 }

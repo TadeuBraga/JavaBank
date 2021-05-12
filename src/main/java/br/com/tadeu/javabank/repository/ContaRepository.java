@@ -31,4 +31,7 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
 			+ "and CONVERT(VARCHAR(8), data_criacao, 112) "
 			+ "<= CONVERT(VARCHAR(8), ?2, 112)", nativeQuery = true)
 	List<Conta> findByDateNativo(Date inicial, Date dtFinal);
+	
+	public List<Conta> findByAtivaTrue();
+	
 }

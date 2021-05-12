@@ -44,4 +44,5 @@ public class Conta {
 	private BigDecimal saldo;
 	@Column(name ="data_criacao")
 	private Date dataCriacao;
+	private Boolean ativa = true;
 }
