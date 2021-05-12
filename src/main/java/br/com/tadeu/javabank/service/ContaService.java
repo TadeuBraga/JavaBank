@@ -13,19 +13,16 @@ import org.springframework.validation.annotation.Validated;
 import br.com.tadeu.javabank.model.Banco;
 import br.com.tadeu.javabank.model.Cliente;
 import br.com.tadeu.javabank.model.Conta;
-import br.com.tadeu.javabank.repository.BancoRepository;
-import br.com.tadeu.javabank.repository.ClienteRepository;
 import br.com.tadeu.javabank.repository.ContaRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Validated
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ContaService {
-	@Autowired
-	private ContaRepository contaRepository;
-	@Autowired
-	private ClienteRepository clienteRepository;
-	@Autowired
-	private BancoRepository bancoRepository;
+	private final ContaRepository contaRepository;
+	private final ClienteService clienteService;
+	private final BancoService bancoService;
 
 
 	public List<Conta> encontraMilionarios() {
@@ -52,14 +49,14 @@ public class ContaService {
 	}
 
 	private void processaClienteExistente(Conta conta) {
-		Cliente cliente = clienteRepository.findByNome(conta.getCliente().getNome());
+		Cliente cliente = clienteService.findByNome(conta.getCliente().getNome());
 		if(cliente != null) {
 			conta.setCliente(cliente);
 		}
 	}
 
 	private void processaBancoExistente(Conta conta) {
-		Banco banco = bancoRepository.findByNome(conta.getBanco().getNome());
+		Banco banco = bancoService.findByNome(conta.getBanco().getNome());
 		if(banco != null) {
 			conta.setBanco(banco);
 		}

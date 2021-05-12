@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tadeu.javabank.model.Conta;
 import br.com.tadeu.javabank.service.ContaService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/contas")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ContaController {
-	@Autowired
-	private ContaService contaService;
+	private final ContaService contaService;
 
 	@GetMapping
 	public List<Conta> buscarTodos() {
