@@ -17,9 +17,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,9 +42,10 @@ public class Conta {
 	@JoinColumn(name = "banco_id")
 	private Banco banco;
 	@NotNull
-	@Column(name ="saldo")
+	@Column(name = "saldo")
 	private BigDecimal saldo;
-	@Column(name ="data_criacao")
+	@Column(name = "data_criacao")
 	private Date dataCriacao;
+	@Builder.Default
 	private Boolean ativa = true;
 }

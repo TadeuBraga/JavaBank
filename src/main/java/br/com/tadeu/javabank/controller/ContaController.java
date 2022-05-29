@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tadeu.javabank.controller.dto.request.ContaRequestDto;
 import br.com.tadeu.javabank.model.Conta;
 import br.com.tadeu.javabank.service.ContaService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ContaController {
 	public List<Conta> buscarTodos() {
 		return contaService.buscarTodos();
 	}
-	
+
 	@GetMapping("/ativas")
 	public List<Conta> buscarAtivas() {
 		return contaService.buscarAtivas();
@@ -37,8 +38,8 @@ public class ContaController {
 	}
 
 	@PostMapping
-	public Conta criar(@RequestBody Conta conta) {
-		return contaService.salvar(conta);
+	public Conta criar(@RequestBody ContaRequestDto contaDto) {
+		return contaService.salvar(contaDto.toModel());
 	}
 
 	@DeleteMapping("/{id}")
