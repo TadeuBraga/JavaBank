@@ -1,6 +1,5 @@
 package br.com.tadeu.javabank.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +23,6 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotEmpty
-	@Column(name = "nome")
 	private String nome;
+	private String numeroSocial;
 }

@@ -8,4 +8,5 @@ import br.com.tadeu.javabank.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	Optional<Cliente> findByNome(String nome);
+	Optional<Cliente> findByNumeroSocial(String numeroSocial);
 }

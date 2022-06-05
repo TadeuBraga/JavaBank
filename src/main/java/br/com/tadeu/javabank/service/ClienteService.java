@@ -20,7 +20,11 @@ public class ClienteService {
 		return clienteRepository.findByNome(nome);
 	}
 
+	public Optional<Cliente> findByNumeroSocial(String numeroSocial) {
+		return clienteRepository.findByNumeroSocial(numeroSocial);
+	}
+
 	public Cliente salvaOuObtemCliente(Cliente cliente) {
-		return findByNome(cliente.getNome()).orElseGet(() -> clienteRepository.save(cliente));
+		return findByNumeroSocial(cliente.getNumeroSocial()).orElseGet(() -> clienteRepository.save(cliente));
 	}
 }
