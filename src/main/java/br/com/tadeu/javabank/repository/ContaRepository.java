@@ -19,19 +19,32 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
 
 	public List<Conta> findByClienteNomeStartsWith(String primeiroNome);
 
-	@Query("SELECT c FROM Conta c WHERE c.dataCriacao >= ?1 and c.dataCriacao <= ?2")
+	@Query("""
+			SELECT c
+			FROM Conta c
+			WHERE c.dataCriacao >= ?1
+				and c.dataCriacao <= ?2
+			""")
 	List<Conta> findByDate(Date dtInicial, Date dtFinal);
 
-	@Query("SELECT c FROM Conta c WHERE c.dataCriacao >= :inicial and c.dataCriacao <= :final")
+	@Query("""
+			SELECT c
+			FROM Conta c
+			WHERE c.dataCriacao >= :inicial
+				and c.dataCriacao <= :final
+			""")
 	List<Conta> findByDate2(@Param("inicial") Date dtInicial, @Param("final") Date dtFinal);
 
-	@Query(value = "SELECT c FROM t_conta c "
-			+ "WHERE CONVERT(VARCHAR(8), data_criacao, 112) "
-			+ ">= CONVERT(VARCHAR(20), ?1, 112) "
-			+ "and CONVERT(VARCHAR(8), data_criacao, 112) "
-			+ "<= CONVERT(VARCHAR(8), ?2, 112)", nativeQuery = true)
+	@Query(value = """
+			SELECT c
+			FROM t_conta c
+			WHERE CONVERT(VARCHAR(8), data_criacao, 112)
+					>= CONVERT(VARCHAR(20), ?1, 112)
+				and CONVERT(VARCHAR(8), data_criacao, 112)
+					<= CONVERT(VARCHAR(8), ?2, 112)
+			""", nativeQuery = true)
 	List<Conta> findByDateNativo(Date inicial, Date dtFinal);
-	
+
 	public List<Conta> findByAtivaTrue();
-	
+
 }
