@@ -8,4 +8,5 @@ import br.com.tadeu.javabank.model.Banco;
 
 public interface BancoRepository extends JpaRepository<Banco, Long> {
 	Optional<Banco> findByNome(String nome);
+	Optional<Banco> findByCodigoInternacional(String codigoInternacional);
 }

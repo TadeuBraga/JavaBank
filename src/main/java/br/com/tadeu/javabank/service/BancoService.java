@@ -20,8 +20,12 @@ public class BancoService {
 		return bancoRepository.findByNome(nome);
 	}
 
+	public Optional<Banco> findByCodigoInternacional(String codigoInternacional) {
+		return bancoRepository.findByCodigoInternacional(codigoInternacional);
+	}
+
 	public Banco salvaOuObtemBanco(Banco banco) {
-		return findByNome(banco.getNome()).orElseGet(() -> bancoRepository.save(banco));
+		return findByCodigoInternacional(banco.getCodigoInternacional()).orElseGet(() -> bancoRepository.save(banco));
 	}
 
 }
