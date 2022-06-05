@@ -40,23 +40,9 @@ public class ContaService {
 
 	public Conta salvar(@Valid Conta conta) {
 		conta.setDataCriacao(new Date());
-		processaClienteExistente(conta);
-		processaBancoExistente(conta);
+		conta.setCliente(clienteService.salvaOuObtemCliente(conta.getCliente()));
+		conta.setBanco(bancoService.salvaOuObtemBanco(conta.getBanco()));
 		return contaRepository.save(conta);
-	}
-
-	private void processaClienteExistente(Conta conta) {
-		var cliente = clienteService.findByNome(conta.getCliente().getNome());
-		if (cliente != null) {
-			conta.setCliente(cliente);
-		}
-	}
-
-	private void processaBancoExistente(Conta conta) {
-		var banco = bancoService.findByNome(conta.getBanco().getNome());
-		if (banco != null) {
-			conta.setBanco(banco);
-		}
 	}
 
 	public void deletarPorId(Long id) {
