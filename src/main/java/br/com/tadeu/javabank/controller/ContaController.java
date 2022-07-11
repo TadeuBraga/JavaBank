@@ -37,11 +37,6 @@ public class ContaController {
 		return contaService.buscarPorId(id);
 	}
 
-	@PostMapping
-	public Conta criar(@RequestBody ContaRequestDto contaDto) {
-		return contaService.salvar(contaDto.toModel());
-	}
-
 	@DeleteMapping("/{id}")
 	public void deletarPorId(@PathVariable Long id) {
 		contaService.deletarPorId(id);
