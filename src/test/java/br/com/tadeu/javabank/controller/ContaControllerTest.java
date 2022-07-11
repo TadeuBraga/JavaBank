@@ -76,7 +76,7 @@ class ContaControllerTest {
         when(contaService.buscarPorId(id)).thenReturn(CONTA);
 
         var result = mockMvc.perform(get("/contas/" + id)).andExpect(status().isOk()).andReturn();
-        var conta = objectMapper.readValue(result.getResponse().getContentAsString(), Conta.class);
+        var conta = objectMapper.readValue(result.getResponse().getContentAsString(), ContaCorrente.class);
 
         assertThat(conta, equalTo(List.of(CONTA)));
     }
