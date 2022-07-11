@@ -78,7 +78,7 @@ class ContaControllerTest {
         var result = mockMvc.perform(get("/contas/" + id)).andExpect(status().isOk()).andReturn();
         var conta = objectMapper.readValue(result.getResponse().getContentAsString(), ContaCorrente.class);
 
-        assertThat(conta, equalTo(List.of(CONTA)));
+        assertThat(conta, equalTo(CONTA));
     }
 
     @Test
