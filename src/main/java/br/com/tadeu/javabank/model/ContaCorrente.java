@@ -1,19 +1,12 @@
 package br.com.tadeu.javabank.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -26,8 +19,8 @@ public final class ContaCorrente extends Conta {
 	private BigDecimal limiteEspecial;
 
 	@Builder
-	public ContaCorrente(Long id, Cliente cliente, Banco banco, BigDecimal saldo, Date dataCriacao, Boolean ativa,
-			BigDecimal limiteEspecial) {
+	public ContaCorrente(Long id, Cliente cliente, Banco banco, BigDecimal saldo, LocalDateTime dataCriacao, Boolean ativa,
+						 BigDecimal limiteEspecial) {
 		super(id, cliente, banco, saldo, dataCriacao, ativa);
 		this.limiteEspecial = limiteEspecial;
 	}
