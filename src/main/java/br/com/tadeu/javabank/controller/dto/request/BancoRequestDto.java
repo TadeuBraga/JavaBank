@@ -1,6 +1,6 @@
 package br.com.tadeu.javabank.controller.dto.request;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 import br.com.tadeu.javabank.model.Banco;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -52,7 +52,7 @@ class ContaControllerTest {
     void deve_BuscarTodos_Quando_Chamado() throws Exception {
         when(contaService.buscarTodos()).thenReturn(List.of(CONTA));
 
-        var result = mockMvc.perform(get("/contas/")).andExpect(status().isOk()).andReturn();
+        var result = mockMvc.perform(get("/contas")).andExpect(status().isOk()).andReturn();
         var contas = objectMapper.readValue(result.getResponse().getContentAsString(),
                 new TypeReference<List<ContaCorrente>>(){});
 
